@@ -38,13 +38,17 @@ jobs:
         
 
     - name: Build Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build -t xavirambla79/docker-graphql:0.0.2 .
+        docker build -t xavirambla79/docker-graphql:$NEW_VERSION .
         docker build -t xavirambla79/docker-graphql:latest .
         
     - name: Push Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker push xavirambla79/docker-graphql:0.0.2
+        docker push xavirambla79/docker-graphql:$NEW_VERSION
         docker push xavirambla79/docker-graphql:latest
         
         
